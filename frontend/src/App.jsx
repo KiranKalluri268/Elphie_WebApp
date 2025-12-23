@@ -5,7 +5,7 @@ import Register from './pages/Register';
 import VerifyContact from './pages/VerifyContact';
 import Home from './pages/Home';
 import PatientProfile from './pages/PatientProfile';
-import './App.css';
+
 
 function PrivateRoute({ children }) {
   // Check for user data in localStorage

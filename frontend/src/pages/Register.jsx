@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signUpUser } from '../services/cognitoAuth';
 import api from '../utils/api';
-import './Register.css';
 
 function Register() {
   const [activeTab, setActiveTab] = useState('clinic');
@@ -174,32 +173,32 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <h1 className="register-title">New User Registration</h1>
-        
-        {error && <div className="error-message">{error}</div>}
+    <div className="min-h-screen bg-gradient-to-br from-[#667eea] to-[#764ba2] py-10 px-5">
+      <div className="max-w-[700px] mx-auto bg-white rounded-xl shadow-2xl p-10">
+        <h1 className="text-center text-gray-800 mb-8 text-3xl font-bold">New User Registration</h1>
 
-        <div className="tabs">
+        {error && <div className="bg-red-100 text-red-700 p-3 rounded-lg mb-5 text-sm border border-red-200">{error}</div>}
+
+        <div className="flex gap-2.5 mb-8 border-b-2 border-gray-200">
           <button
-            className={`tab ${activeTab === 'clinic' ? 'active' : ''}`}
+            className={`py-3 px-6 bg-transparent border-0 border-b-[3px] border-transparent text-base font-medium text-gray-500 cursor-pointer transition-all hover:text-[#667eea] ${activeTab === 'clinic' ? 'text-[#667eea] border-b-[#667eea]' : ''}`}
             onClick={() => setActiveTab('clinic')}
           >
             Clinic Info
           </button>
           <button
-            className={`tab ${activeTab === 'user' ? 'active' : ''}`}
+            className={`py-3 px-6 bg-transparent border-0 border-b-[3px] border-transparent text-base font-medium text-gray-500 cursor-pointer transition-all hover:text-[#667eea] ${activeTab === 'user' ? 'text-[#667eea] border-b-[#667eea]' : ''}`}
             onClick={() => setActiveTab('user')}
           >
             User (Doctor/Staff) Info
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="register-form">
+        <form onSubmit={handleSubmit} className="flex flex-col">
           {activeTab === 'clinic' && (
-            <div className="tab-content">
-              <div className="form-group">
-                <label htmlFor="clinicName">Clinic Name *</label>
+            <div className="flex flex-col gap-5 min-h-[400px]">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="clinicName" className="font-medium text-gray-800 text-sm">Clinic Name *</label>
                 <input
                   type="text"
                   id="clinicName"
@@ -207,11 +206,12 @@ function Register() {
                   value={clinicData.clinicName}
                   onChange={handleClinicChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="address.street">Street Address *</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="address.street" className="font-medium text-gray-800 text-sm">Street Address *</label>
                 <input
                   type="text"
                   id="address.street"
@@ -219,12 +219,13 @@ function Register() {
                   value={clinicData.address.street}
                   onChange={handleClinicChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="address.city">City *</label>
+              <div className="grid grid-cols-2 gap-5">
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="address.city" className="font-medium text-gray-800 text-sm">City *</label>
                   <input
                     type="text"
                     id="address.city"
@@ -232,11 +233,12 @@ function Register() {
                     value={clinicData.address.city}
                     onChange={handleClinicChange}
                     required
+                    className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="address.state">State *</label>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="address.state" className="font-medium text-gray-800 text-sm">State *</label>
                   <input
                     type="text"
                     id="address.state"
@@ -244,12 +246,13 @@ function Register() {
                     value={clinicData.address.state}
                     onChange={handleClinicChange}
                     required
+                    className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                   />
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="address.zip">Zip Code *</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="address.zip" className="font-medium text-gray-800 text-sm">Zip Code *</label>
                 <input
                   type="text"
                   id="address.zip"
@@ -257,11 +260,12 @@ function Register() {
                   value={clinicData.address.zip}
                   onChange={handleClinicChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="contactNumber">Contact Number *</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="contactNumber" className="font-medium text-gray-800 text-sm">Contact Number *</label>
                 <input
                   type="tel"
                   id="contactNumber"
@@ -269,11 +273,12 @@ function Register() {
                   value={clinicData.contactNumber}
                   onChange={handleClinicChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="clinicLicenseNumber">Clinic License # *</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="clinicLicenseNumber" className="font-medium text-gray-800 text-sm">Clinic License # *</label>
                 <input
                   type="text"
                   id="clinicLicenseNumber"
@@ -281,15 +286,16 @@ function Register() {
                   value={clinicData.clinicLicenseNumber}
                   onChange={handleClinicChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
             </div>
           )}
 
           {activeTab === 'user' && (
-            <div className="tab-content">
-              <div className="form-group">
-                <label htmlFor="userFullName">User Full Name *</label>
+            <div className="flex flex-col gap-5 min-h-[400px]">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="userFullName" className="font-medium text-gray-800 text-sm">User Full Name *</label>
                 <input
                   type="text"
                   id="userFullName"
@@ -297,17 +303,19 @@ function Register() {
                   value={userData.userFullName}
                   onChange={handleUserChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="role">Role *</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="role" className="font-medium text-gray-800 text-sm">Role *</label>
                 <select
                   id="role"
                   name="role"
                   value={userData.role}
                   onChange={handleUserChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 >
                   <option value="Doctor">Doctor</option>
                   <option value="Staff">Staff</option>
@@ -315,8 +323,8 @@ function Register() {
                 </select>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="mobileNumber">Mobile Number (at least one required)</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="mobileNumber" className="font-medium text-gray-800 text-sm">Mobile Number (at least one required)</label>
                 <input
                   type="tel"
                   id="mobileNumber"
@@ -324,11 +332,12 @@ function Register() {
                   value={userData.mobileNumber}
                   onChange={handleUserChange}
                   placeholder="+91 9876543210"
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="email">Email (at least one required)</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="font-medium text-gray-800 text-sm">Email (at least one required)</label>
                 <input
                   type="email"
                   id="email"
@@ -336,11 +345,12 @@ function Register() {
                   value={userData.email}
                   onChange={handleUserChange}
                   placeholder="doctor@clinic.com"
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="password">Password *</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="password" className="font-medium text-gray-800 text-sm">Password *</label>
                 <input
                   type="password"
                   id="password"
@@ -348,11 +358,12 @@ function Register() {
                   value={userData.password}
                   onChange={handleUserChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password *</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="confirmPassword" className="font-medium text-gray-800 text-sm">Confirm Password *</label>
                 <input
                   type="password"
                   id="confirmPassword"
@@ -360,23 +371,35 @@ function Register() {
                   value={userData.confirmPassword}
                   onChange={handleUserChange}
                   required
+                  className="p-3 border-2 border-gray-200 rounded-lg text-base transition-colors focus:outline-none focus:border-[#667eea]"
                 />
               </div>
 
-              <p className="info-text" style={{ color: '#666', fontSize: '14px', marginTop: '10px' }}>
+              <p style={{ color: '#666', fontSize: '14px', marginTop: '10px' }}>
                 * At least one contact method (Email or Mobile Number) is required
               </p>
             </div>
           )}
 
-          <div className="form-actions">
-            <button type="submit" className="submit-button" disabled={loading}>
+          <div className="flex gap-4 mt-8 pt-8 border-t border-gray-200">
+            <button
+              type="submit"
+              className="flex-1 py-3 px-6 rounded-lg text-base font-semibold cursor-pointer transition-all text-center border-0 bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={loading}
+            >
               {loading ? 'Registering...' : 'Save / Register'}
             </button>
-            <button type="button" className="cancel-button" onClick={handleCancel}>
+            <button
+              type="button"
+              className="py-3 px-6 rounded-lg text-base font-semibold cursor-pointer transition-all text-center border-0 bg-gray-100 text-gray-800 hover:bg-gray-200"
+              onClick={handleCancel}
+            >
               Cancel
             </button>
-            <Link to="/login" className="back-button">
+            <Link
+              to="/login"
+              className="py-3 px-6 rounded-lg text-base font-semibold cursor-pointer transition-all text-center no-underline bg-white text-[#667eea] border-2 border-[#667eea] hover:bg-indigo-50"
+            >
               Back to Login
             </Link>
           </div>

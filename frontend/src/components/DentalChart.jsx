@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react';
-import './DentalChart.css';
 
 // FDI tooth numbering system
 const UPPER_TEETH = [
@@ -87,11 +86,11 @@ function DentalChart({ onToothClick, patient }) {
         transform={`translate(${tooth.x}, ${tooth.y})`}
         onClick={() => handleToothClick(tooth.id)}
         style={{ cursor: 'pointer' }}
-        className={`tooth-group ${isSelected ? 'selected' : ''} ${hasRecords ? 'has-records' : ''}`}
+        className={`transition-transform duration-200 ease-out hover:-translate-y-0.5 hover:scale-105 ${isSelected ? 'selected' : ''} ${hasRecords ? 'has-records' : ''} group`}
       >
         <path
           d={details.path}
-          className="tooth-body"
+          className={`transition-colors duration-200 drop-shadow-sm group-hover:fill-gray-100 group-hover:stroke-gray-400 ${isSelected ? 'filter drop-shadow-md' : ''}`}
           fill={isSelected ? '#667eea' : hasRecords ? '#ffeb3b' : '#ffffff'}
           stroke={isSelected ? '#4a5568' : '#cbd5e0'}
           strokeWidth="1.5"
@@ -113,7 +112,7 @@ function DentalChart({ onToothClick, patient }) {
           fontSize="10"
           fontWeight="700"
           fill={isSelected ? '#4a5568' : '#718096'}
-          className="tooth-label"
+          className="pointer-events-none"
           pointerEvents="none"
         >
           {tooth.label}
@@ -123,23 +122,23 @@ function DentalChart({ onToothClick, patient }) {
   };
 
   return (
-    <div className="dental-chart-wrapper">
-      <div className="chart-legend">
-        <div className="legend-item">
-          <div className="legend-icon no-records"></div>
+    <div className="flex flex-col items-center gap-5">
+      <div className="flex gap-6 justify-center flex-wrap bg-white py-3 px-6 rounded-[50px] shadow-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-3.5 h-3.5 rounded border-[1.5px] border-gray-300 bg-white"></div>
           <span>Healthy</span>
         </div>
-        <div className="legend-item">
-          <div className="legend-icon has-records"></div>
+        <div className="flex items-center gap-2">
+          <div className="w-3.5 h-3.5 rounded border-[1.5px] border-yellow-400 bg-yellow-300"></div>
           <span>Treated</span>
         </div>
-        <div className="legend-item">
-          <div className="legend-icon selected"></div>
+        <div className="flex items-center gap-2">
+          <div className="w-3.5 h-3.5 rounded border-[1.5px] border-indigo-600 bg-[#667eea]"></div>
           <span>Active</span>
         </div>
       </div>
-      <div className="chart-container">
-        <svg width="900" height="300" viewBox="0 0 900 300" className="dental-chart-svg">
+      <div className="overflow-x-auto w-full flex justify-center p-5 bg-gray-50 rounded-lg">
+        <svg width="900" height="300" viewBox="0 0 900 300" className="bg-white rounded-lg shadow-sm">
           <defs>
             <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
               <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" />
@@ -166,7 +165,7 @@ function DentalChart({ onToothClick, patient }) {
           {LOWER_TEETH.map(renderTooth)}
         </svg>
       </div>
-      <p className="chart-instruction">Select a tooth to view detailed records and history</p>
+      <p className="text-gray-400 text-[13px] mt-2.5 italic">Select a tooth to view detailed records and history</p>
     </div>
   );
 }
